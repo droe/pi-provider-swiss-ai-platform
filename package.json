@@ -1,6 +1,7 @@
 {
   "name": "pi-provider-swiss-ai-platform",
   "version": "0.1.0",
+  "license": "MIT",
   "keywords": ["pi-package"],
   "pi": {
     "extensions": ["./index.ts"]
