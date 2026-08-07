@@ -1,0 +1,82 @@
+# Pi provider extension for Swiss AI Platform
+Copyright (C) 2026, [Daniel Roethlisberger](//daniel.roe.ch/).  
+https://github.com/droe/pi-provider-swiss-ai-platform  
+
+Experimental Pi extension that registers a model provider for [Swiss AI
+Platform][1] by Swisscom in partnership with NVIDIA, offered via Swisscom's API
+platform [Digital Marketplace][2].
+
+[1]: https://www.swisscom.ch/en/business/enterprise/offer/platforms-applications/data-driven-business/swiss-ai-platform.html
+[2]: https://digital.swisscom.com/products/swiss-ai-platform/info
+
+## Models
+
+As of August 2026, the following models offered as part of Swiss AI Platform
+work with Pi:
+
+  - `swiss-ai/Apertus-v1.5-70B`
+  - `google/gemma-4-31b-it`
+  - `qwen/qwen3.5-397b-a17b`
+  - `qwen/qwen3.6-35b-a3b`
+  - `mistralai/mistral-small-4-119b-2603` (partially)
+
+See `MODEL_METADATA` in `index.ts` for metadata on all models, including hidden
+models and why they have been hidden.  Feedback or patches to improve model
+compatibility very welcome.
+
+Models added more recently, i.e. models not included in `MODEL_METADATA` yet,
+may or may not work, and likely need manual configuration in
+`~/.pi/agent/models.json`.
+
+## Prerequisites
+
+You need a Swiss AI Platform subscription and matching Client ID and Client
+Secret.
+
+In your subscription on Digital Marketplace, select Documentation and check
+«Production Url».  The last path component is the subscription name, e.g.
+`all-models` or `apertus-1.5-70b`.  Note that for model-specific subscriptions,
+the subscription name is different from the model identifier.
+
+The credentials are more straightforward.  From your subscription, select
+«Credentials» and check the «OAuth 2.0 Credentials» section.
+
+## Installation
+
+```
+pi install npm:pi-provider-swiss-ai-platform
+```
+
+## Configuration
+
+Interactive configuration as usual: `/login` -> «Swiss AI Platform» prompts for
+the subscription name, the Client ID and the Client Secret, verifies them
+against the gateway and stores them in `~/.pi/agent/auth.json`.  Access tokens
+are minted on demand and cached in memory until they expire.
+
+Multiple configured subscriptions are not currently implemented.  Switching
+subscription is another `/login`.
+
+For headless use, the following environment variables can be set:
+
+-   `SWISS_AI_PLATFORM_SUBSCRIPTION`
+-   `SWISS_AI_PLATFORM_CLIENT_ID`
+-   `SWISS_AI_PLATFORM_CLIENT_SECRET`
+
+## Implementation Details
+
+Models are served over the OpenAI-compatible `/v1/chat/completions` API; only
+some of them also support `/v1/responses`, so completions is the default and
+`MODEL_METADATA.api` opts a model into the Responses API.  Authentication is an
+OAuth 2.0 client-credentials grant (HTTP Basic client authentication).
+
+The model catalog is pulled from `/v1/models` on model refresh and cached by Pi
+in `~/.pi/agent/models-store.json`.  The endpoint returns ids only, so model
+capabilities come from the curated `MODEL_METADATA` table in `index.ts`.
+Unknown ids fall back to `DEFAULT_METADATA`; entries flagged `hideModel: true`
+are dropped from the catalog.  Per-model overrides are still possible in
+`~/.pi/agent/models.json`.
+
+## Disclaimer
+
+This Pi extension is inofficial, neither provided by nor supported by Swisscom.
