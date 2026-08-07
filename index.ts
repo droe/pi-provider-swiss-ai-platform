@@ -64,6 +64,7 @@ interface ModelMetadata {
  * Curated capabilities per model id, keyed exactly as returned by /v1/models.
  * Model documentation by Swisscom:
  * https://docs.cloud.swisscom.ch/guide/cloud-services/aip/use/inference-endpoints/
+ * https://docs.cloud.swisscom.ch/guide/cloud-services/aip/models/overview
  *
  * Configuration may not be perfect, please submit issues or PRs with improvements.
  */
