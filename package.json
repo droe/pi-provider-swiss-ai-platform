@@ -2,8 +2,28 @@
   "name": "pi-provider-swiss-ai-platform",
   "version": "0.1.0",
   "license": "MIT",
-  "keywords": ["pi-package"],
+  "description": "Pi provider extension for Swiss AI Platform",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "agent",
+    "swiss-ai-platform",
+    "swisscom"
+  ],
   "pi": {
     "extensions": ["./index.ts"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/droe/pi-provider-swiss-ai-platform.git"
+  },
+  "homepage": "https://github.com/droe/pi-provider-swiss-ai-platform#readme",
+  "bugs": {
+    "url": "https://github.com/droe/pi-provider-swiss-ai-platform/issues"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*"
   }
 }
