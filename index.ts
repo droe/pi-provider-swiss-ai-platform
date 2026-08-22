@@ -200,6 +200,7 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
   "zai-org/glm-5.2-fp8": {
     name: "GLM 5.2 FP8 744B A40B",
     api: "openai-responses",
+    reasoning: true,
     input: ["text"],
     contextWindow: 262144,
     thinkingLevelMap: {
