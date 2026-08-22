@@ -63,8 +63,12 @@ interface ModelMetadata {
 /**
  * Curated capabilities per model id, keyed exactly as returned by /v1/models.
  * Model documentation by Swisscom:
+ *
  * https://docs.cloud.swisscom.ch/guide/cloud-services/aip/use/inference-endpoints/
  * https://docs.cloud.swisscom.ch/guide/cloud-services/aip/models/overview
+ *
+ * Model availability status (GA, preview, deprecated) deliberately not tracked in a
+ * structured way, as that info is too short-lived.
  *
  * Configuration may not be perfect, please submit issues or PRs with improvements.
  */
@@ -83,11 +87,13 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
   },
   "meta/llama-3.1-8b-instruct": {
     // Disabled because the model does not seem to work with Pi.
+    // Model deprecated, not worth fixing.
     hideModel: true,
     name: "Llama 3.1 8b instruct",
   },
   "meta/llama-4-scout-17b-16e-instruct": {
     // Disabled because tool calling does not seem to work.
+    // Model deprecated, not worth fixing.
     hideModel: true,
     name: "Llama 4 Scout 17b 16e instruct",
     input: ["text", "image"],
@@ -98,7 +104,7 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     // responses API results in error 400 "'input_text' is not a valid
     // ChunkTypes".  Use completions until someone figures this one out.
     // FIXME [THINK]...[/THINK] tags are not recognised by Pi.
-    name: "Mistral Small 4 119b 2603",
+    name: "Mistral Small 4 119B 2603",
     //api: "openai-responses",
     reasoning: true,
     input: ["text", "image"],
@@ -124,21 +130,21 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
   "nvidia/llama-3.2-nv-embedqa-1b-v2": {
     // Disabled because Pi does not do text-to-embeddings.
     hideModel: true,
-    name: "Llama 3.2 NV embedqa 1b v2",
+    name: "Llama 3.2 NV embedqa 1B v2",
   },
   "openai/gpt-oss-20b": {
     // FIXME Works, but performs very poorly with tool calling.
     // Should investigate root cause.
     hideModel: true,
-    name: "GPT OSS 20b",
+    name: "GPT OSS 20B",
     input: ["text"],
     contextWindow: 131072,
   },
   "openai/gpt-oss-120b": {
-    // FIXME Works, but performs very poorly with tool calling.
-    // Should investigate root cause.
+    // Works, but performs very poorly with tool calling.
+    // Model deprecated, not worth fixing.
     hideModel: true,
-    name: "GPT OSS 120b",
+    name: "GPT OSS 120B",
     input: ["text"],
     contextWindow: 131072,
   },
@@ -148,7 +154,7 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     name: "Whisper Large V3 Turbo",
   },
   "qwen/qwen3.5-397b-a17b": {
-    name: "Qwen 3.5 397b A17B",
+    name: "Qwen 3.5 397B A17B",
     reasoning: true,
     input: ["text"],
     contextWindow: 262144,
@@ -171,7 +177,7 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     // responses API results in "Error: OpenAI API error (429): 429
     // status code (no body)".  Use completions until someone figures
     // this one out.
-    name: "Qwen 3.6 35b A3B",
+    name: "Qwen 3.6 35B A3B",
     //api: "openai-responses",
     reasoning: true,
     input: ["text"],
@@ -186,10 +192,25 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     name: "Rednote Hilab Dots OCR",
   },
   "swiss-ai/Apertus-v1.5-70B": {
-    name: "Apertus v1.5 70b",
+    name: "Apertus 1.5 70B",
     api: "openai-responses",
     input: ["text", "image"],
     contextWindow: 262144,
+  },
+  "zai-org/glm-5.2-fp8": {
+    name: "GLM 5.2 FP8 744B A40B",
+    api: "openai-responses",
+    input: ["text"],
+    contextWindow: 262144,
+    thinkingLevelMap: {
+      off: "none",
+      minimal: null,
+      low: null,
+      medium: null,
+      high: "high",
+      xhigh: null,
+      max: "max",
+    },
   },
 };
 

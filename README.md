@@ -51,11 +51,12 @@ As of August 2026, the following models offered as part of Swiss AI Platform
 work with Pi and show up in `/model` when using a subscription that includes
 them:
 
-  - `swiss-ai/Apertus-v1.5-70B`
   - `google/gemma-4-31b-it`
+  - `mistralai/mistral-small-4-119b-2603`
   - `qwen/qwen3.5-397b-a17b`
   - `qwen/qwen3.6-35b-a3b`
-  - `mistralai/mistral-small-4-119b-2603` (partially)
+  - `swiss-ai/Apertus-v1.5-70B`
+  - `zai-org/glm-5.2-fp8`
 
 See `MODEL_METADATA` in `index.ts` for metadata on all models, including hidden
 models and why they have been hidden.  Feedback or patches to improve model
