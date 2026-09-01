@@ -137,6 +137,7 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     // Should investigate root cause.
     hideModel: true,
     name: "GPT OSS 20B",
+    reasoning: true,
     input: ["text"],
     contextWindow: 131072,
   },
@@ -145,6 +146,7 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     // Model deprecated, not worth fixing.
     hideModel: true,
     name: "GPT OSS 120B",
+    reasoning: true,
     input: ["text"],
     contextWindow: 131072,
   },
