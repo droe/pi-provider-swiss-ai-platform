@@ -2,9 +2,9 @@
 Copyright (C) 2026, [Daniel Roethlisberger](//daniel.roe.ch/).  
 https://github.com/droe/pi-provider-swiss-ai-platform  
 
-Experimental Pi extension that registers a model provider for [Swiss AI
-Platform][1] by Swisscom in partnership with NVIDIA, offered via Swisscom's API
-platform [Digital Marketplace][2].
+Experimental Pi extension enabling the use of models provided by Swisscom's
+[Swiss AI Platform][1] commercial inference service, offered through Swisscom's
+API platform [Digital Marketplace][2].
 
 [1]: https://www.swisscom.ch/en/business/enterprise/offer/platforms-applications/data-driven-business/swiss-ai-platform.html
 [2]: https://digital.swisscom.com/products/swiss-ai-platform/info
@@ -47,7 +47,7 @@ For the credentials, in your subscription on Digital Marketplace, select
 
 ## Models
 
-As of August 2026, the following models offered as part of Swiss AI Platform
+As of September 2026, the following models offered as part of Swiss AI Platform
 work with Pi and show up in `/model` when using a subscription that includes
 them:
 
@@ -58,9 +58,9 @@ them:
   - `swiss-ai/Apertus-v1.5-70B`
   - `zai-org/glm-5.2-fp8`
 
-See `MODEL_METADATA` in `index.ts` for metadata on all models, including hidden
-models and why they have been hidden.  Feedback or patches to improve model
-compatibility very welcome.
+See `MODEL_METADATA` in `index.ts` for metadata on all models, including models
+hidden by this Pi extension, and the reason why they have been hidden.
+Feedback or patches to improve model compatibility very welcome.
 
 Models added more recently, i.e. models not included in `MODEL_METADATA` yet,
 may or may not work, and likely need manual configuration in
@@ -82,17 +82,10 @@ are dropped from the catalog.  Per-model overrides are still possible in
 
 ## Known Issues
 
--   Some models need a lot of handholding, e.g. for finding files in the
-    current working directory, or for correct tool calling.  This might imply
-    that the model is not called in the best way possible, or it might simply
-    mean the model is bad at tool calling or instruction following.
--   Some models are disabled because they do not work for reasons that might be
-    solvable.  See notes in `MODEL_METADATA` in `index.ts`.
--   Pi does not recognize the thinking tags for
-    `mistralai/mistral-small-4-119b-2603`, unsure if this can be fixed with
-    model metadata or if it would need updates to Pi proper.
--   Only supports a single subscription at the time, which is inconvenient when
-    being subscribed to multiple single-model subscriptions.
+-   Pi does not recognize `[THINK]...[/THINK]` thinking tags that
+    `mistralai/mistral-small-4-119b-2603` sometimes produces, unsure if this
+    can be fixed with model metadata, would need updates to Pi proper, or is a
+    failure mode of the model or the inference service.
 
 ## Disclaimer
 
