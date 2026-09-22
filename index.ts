@@ -74,7 +74,14 @@ interface ModelMetadata {
  */
 const MODEL_METADATA: Record<string, ModelMetadata> = {
   "google/gemma-4-31b-it": {
-    name: "Gemma 4 31b",
+    name: "Gemma 4 31B it",
+    api: "openai-responses",
+    reasoning: true,
+    input: ["text", "image"],
+    contextWindow: 256000,
+  },
+  "google/gemma-4-31b-it-preview": {
+    name: "Gemma 4 31B it preview",
     api: "openai-responses",
     reasoning: true,
     input: ["text", "image"],
@@ -89,13 +96,13 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     // Disabled because the model does not seem to work with Pi.
     // Model deprecated, not worth fixing.
     hideModel: true,
-    name: "Llama 3.1 8b instruct",
+    name: "Llama 3.1 8B instruct",
   },
   "meta/llama-4-scout-17b-16e-instruct": {
     // Disabled because tool calling does not seem to work.
     // Model deprecated, not worth fixing.
     hideModel: true,
-    name: "Llama 4 Scout 17b 16e instruct",
+    name: "Llama 4 Scout 17B 16E instruct",
     input: ["text", "image"],
     contextWindow: 131072,
   },
@@ -125,16 +132,20 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
   "nvidia/llama-3.1-nemoguard-8b-content-safety": {
     // Disabled because Pi does not do content safety.
     hideModel: true,
-    name: "Llama 3.1 Nemoguard 8b content safety",
+    name: "Llama 3.1 Nemoguard 8B content safety",
   },
   "nvidia/llama-3.2-nv-embedqa-1b-v2": {
     // Disabled because Pi does not do text-to-embeddings.
     hideModel: true,
     name: "Llama 3.2 NV embedqa 1B v2",
   },
+  "nvidia/nemotron-3-embed-8b-bf16": {
+    // Disabled because Pi does not do text-to-embeddings.
+    hideModel: true,
+    name: "Nemotron 3 embed 8B bf16",
+  },
   "openai/gpt-oss-20b": {
-    // FIXME Works, but performs very poorly with tool calling.
-    // Should investigate root cause.
+    // Works, but performs very poorly with tool calling.
     hideModel: true,
     name: "GPT OSS 20B",
     reasoning: true,
@@ -175,10 +186,10 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     },
   },
   "qwen/qwen3.6-35b-a3b": {
-    // FIXME Docs state that this model supports the responses API, but
+    // Docs state that this model supports the responses API, but
     // responses API results in "Error: OpenAI API error (429): 429
-    // status code (no body)".  Use completions until someone figures
-    // this one out.
+    // status code (no body)".
+    // Model deprecated, not worth fixing.
     name: "Qwen 3.6 35B A3B",
     //api: "openai-responses",
     reasoning: true,
