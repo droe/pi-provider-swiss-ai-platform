@@ -1,6 +1,6 @@
 {
   "name": "pi-provider-swiss-ai-platform",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "description": "Pi provider extension for Swiss AI Platform, Swisscom's inference service",
   "keywords": [
