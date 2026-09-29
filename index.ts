@@ -205,6 +205,15 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
     reasoning: true,
     input: ["text"],
     contextWindow: 262144,
+    thinkingLevelMap: {
+      off: "none",
+      minimal: null,
+      low: "low",
+      medium: "medium",
+      high: null,
+      xhigh: "xhigh",
+      max: null,
+    },
     compat: {
       thinkingFormat: "qwen",
     },
