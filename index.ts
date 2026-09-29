@@ -199,6 +199,16 @@ const MODEL_METADATA: Record<string, ModelMetadata> = {
       thinkingFormat: "qwen",
     },
   },
+  "qwen/qwen3.8-27b": {
+    name: "Qwen 3.8 27B",
+    //api: "openai-responses",
+    reasoning: true,
+    input: ["text"],
+    contextWindow: 262144,
+    compat: {
+      thinkingFormat: "qwen",
+    },
+  },
   "rednote-hilab/dots.ocr": {
     // Disabled because Pi does not do OCR.
     hideModel: true,
